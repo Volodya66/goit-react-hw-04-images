@@ -6,8 +6,8 @@ export default function ImageGallery({ cards,getBigPhoto }) {
   //  console.log('cardssssss', cards);
   return (
     <ul className="ImageGallery">
-      {cards.map( ({ id, webformatURL,largeImageURL, tags })=>{
-        return <ImageGalleryItem key={id} srs={webformatURL} getBigPhoto={getBigPhoto} alt={tags} bigPhoto={ largeImageURL}/>
+      {cards.map( ({  webformatURL,largeImageURL, tags })=>{
+        return <ImageGalleryItem key={webformatURL} srs={webformatURL} getBigPhoto={getBigPhoto} alt={tags} bigPhoto={ largeImageURL}/>
       })}
     </ul>
   );

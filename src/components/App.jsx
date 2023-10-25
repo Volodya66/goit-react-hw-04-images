@@ -46,9 +46,7 @@ componentDidUpdate(prevProps,prevState){
 }
 
 getBigUrlPhoto=(evt)=>{
-  // this.setState({ bigUrl: null })
   const bigPhotoId = evt.currentTarget.getAttribute('id');
-  // console.log(bigPhotoId)
   this.setState({ bigUrl: bigPhotoId });
   
 }
@@ -66,9 +64,6 @@ settingSearchOption=option=>{
 render(){
   const {photo,totalPages,page,loading,bigUrl} = this.state;
   const dieRenderingBtn = totalPages > page;
-  // console.log(loading)
-  // console.log('searchPhoto', this.state.searchPhoto)
-   console.log('state',this.state)
   return (
     <>
       <Searchbar onSubmit={this.settingSearchOption} />
@@ -76,7 +71,7 @@ render(){
       {loading && (<Loader/>)}
       {dieRenderingBtn && (<Button onClick={this.onClick} />)}
       {bigUrl && (<Modals url={bigUrl} onClose={() => this.setState({ bigUrl: null })}/>)}
-      {/* {error&& ()} */}
+     
     </>
   )
 }
