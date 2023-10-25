@@ -61,7 +61,7 @@ img {
   top: 0;
   left: 0;
   position: sticky;
-  /* z-index: 1100; */
+  z-index: 11;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,7 +94,7 @@ img {
   width: 48px;
   height: 48px;
   border: 0;
-  /* background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg'); */
+  background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -160,6 +160,7 @@ img {
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
+
 
 .ImageGalleryItem-image {
   width: 100%;
