@@ -14,21 +14,23 @@ class App extends Component {
 
 state = {
   searchPhoto: '',   
-  page: '',    
+  page: 0,    
   totalPages: '',   //? then
   totalHits:'',     //? then
   photo:  [],      
   loading: false,    
   error: null,        //? then
   bigUrl: null,
+  repetitionName : false,
 };
 
-componentDidUpdate(prevProps,prevState){
-  const { searchPhoto, page } = this.state;
+componentDidUpdate(_,prevState){
+  const { searchPhoto, page,repetitionName } = this.state;
   
-  if (prevState.searchPhoto !== searchPhoto || prevState.page !== page) {
-    this.setState({ error:null });
-
+  if (prevState.searchPhoto !== searchPhoto || prevState.page !== page || prevState.repetitionName !== repetitionName) {
+    this.setState({ error:null , loading: true,repetitionName : false});
+console.log(prevState.searchPhoto)
+console.log(searchPhoto)
     getImage(searchPhoto, page)
     .then(data => {
       this.setState({ totalHits: data.totalHits, totalPages: Math.ceil(data.totalHits / 12) })
@@ -39,11 +41,12 @@ componentDidUpdate(prevProps,prevState){
     )
     .catch(error => this.setState({error:error}))
     .finally(() => {
-        this.setState({ loading: false }); 
+        this.setState({ loading: false });
       });
-
   }
-}
+  }
+  
+  
 
 getBigUrlPhoto=(evt)=>{
   const bigPhotoId = evt.currentTarget.getAttribute('id');
@@ -53,17 +56,33 @@ getBigUrlPhoto=(evt)=>{
   
 onClick = (event) => {
   this.setState(prevState => ({
-    page: prevState.page + 1,loading: true
+    page: prevState.page + 1,
+    loading: true
   }));
 }
   
-settingSearchOption=option=>{
-  this.setState({ photo: [],searchPhoto: option,page: 1,totalPages: '',totalHits:'' ,loading: true,});
+ 
+  
+  settingSearchOption = option => {
+ 
+  if (this.state.searchPhoto === option) {
+    console.log('bb')
+    // this.setState(prevSate =>({photo: prevSate.photo.slice(0, 0)}))
+    this.setState({
+      searchPhoto: option, photo: [], page: 1
+      , repetitionName: true, totalPages: '', totalHits: ''
+    });
+    // this.setState(prevSate =>({photo: prevSate.photo}))
+    console.log(this.state)
+    return
+  }
+   this.setState({ photo: [],searchPhoto: option,totalPages: '',page: 1,totalHits:''  });
 }
   
 render(){
-  const {photo,totalPages,page,loading,bigUrl} = this.state;
+  const {photo,totalPages,page,loading,bigUrl,error} = this.state;
   const dieRenderingBtn = totalPages > page;
+  console.log(this.state)
   return (
     <>
       <Searchbar onSubmit={this.settingSearchOption} />
@@ -71,7 +90,7 @@ render(){
       {loading && (<Loader/>)}
       {dieRenderingBtn && (<Button onClick={this.onClick} />)}
       {bigUrl && (<Modals url={bigUrl} onClose={() => this.setState({ bigUrl: null })}/>)}
-     
+      {error && (error)}
     </>
   )
 }
