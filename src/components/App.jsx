@@ -29,7 +29,8 @@ componentDidUpdate(_,prevState){
   
   if (prevState.searchPhoto !== searchPhoto || prevState.page !== page ) {
     this.setState({ error:null , loading: true});
-
+console.log(prevState.searchPhoto)
+console.log(searchPhoto)
     getImage(searchPhoto, page)
     .then(data => {
       this.setState({ totalHits: data.totalHits, totalPages: Math.ceil(data.totalHits / 12) })
@@ -64,14 +65,15 @@ onClick = (event) => {
   
   settingSearchOption = option => {
  
-  // if (this.state.searchPhoto === option) {
+  if (this.state.searchPhoto === option) {
+    // if(this.state.page === 1 ){return}
   //   console.log('bb')
   //   // this.setState(prevSate =>({photo: prevSate.photo.slice(0, 0)}))
-  //   this.setState({searchPhoto: option, photo: [], page: 1, totalPages: '', totalHits: ''});
-  //   // this.setState(prevSate =>({photo: prevSate.photo}))
+    // this.setState({searchPhoto: option,  page: 1, totalPages: '', totalHits: ''});
+    // this.setState(prevSate =>({photo: prevSate.photo}))
   //   console.log(this.state)
   //   return
-    // }
+  }
    this.setState({ photo: [],searchPhoto: option,totalPages: '',page: 1,totalHits:''  });
 }
   
