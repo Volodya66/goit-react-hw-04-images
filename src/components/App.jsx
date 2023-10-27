@@ -29,8 +29,7 @@ componentDidUpdate(_,prevState){
   
   if (prevState.searchPhoto !== searchPhoto || prevState.page !== page ) {
     this.setState({ error:null , loading: true});
-console.log(prevState.searchPhoto)
-console.log(searchPhoto)
+
     getImage(searchPhoto, page)
     .then(data => {
       this.setState({ totalHits: data.totalHits, totalPages: Math.ceil(data.totalHits / 12) })
@@ -65,22 +64,23 @@ onClick = (event) => {
   
   settingSearchOption = option => {
  
-  if (this.state.searchPhoto === option) {
-    // if(this.state.page === 1 ){return}
-  //   console.log('bb')
-  //   // this.setState(prevSate =>({photo: prevSate.photo.slice(0, 0)}))
-    // this.setState({searchPhoto: option,  page: 1, totalPages: '', totalHits: ''});
-    // this.setState(prevSate =>({photo: prevSate.photo}))
-  //   console.log(this.state)
-  //   return
-  }
+  if (this.state.searchPhoto === option ) {
+    this.setState(prevState => ({
+    page: prevState.page + 1,
+    loading: true
+    }));
+    
+      return
+    }
+ 
+  
    this.setState({ photo: [],searchPhoto: option,totalPages: '',page: 1,totalHits:''  });
 }
   
 render(){
   const {photo,totalPages,page,loading,bigUrl,error} = this.state;
   const dieRenderingBtn = totalPages > page;
-  console.log(this.state)
+  // console.log(this.state)
   return (
     <>
       <Searchbar onSubmit={this.settingSearchOption} />

@@ -26,8 +26,8 @@ closeModal = (e) => {
     const { url } = this.props;
       return (
         
-          <div className={css.overlay} onClick={this.closeModal} >
-              <div className={css.modal}>
+          <div className={css.Overlay} onClick={this.closeModal} >
+              <div className={css.Modal}>
                   <img src={url} alt="" />
               </div>
           </div>
