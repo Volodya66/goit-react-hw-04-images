@@ -63,14 +63,19 @@ onClick = (event) => {
  
   
   settingSearchOption = option => {
+ const {searchPhoto,totalPages,page} =this.state
  
-  if (this.state.searchPhoto === option ) {
-    this.setState(prevState => ({
-    page: prevState.page + 1,
-    loading: true
-    }));
-    
+  if (searchPhoto === option ) {
+    // if (totalPages === page) {
+      this.setState({ page: 1 });
       return
+    // }
+    // this.setState(prevState => ({
+    // page: prevState.page + 1,
+    // loading: true
+    // }));
+    
+    //   return
     }
  
   
@@ -80,7 +85,7 @@ onClick = (event) => {
 render(){
   const {photo,totalPages,page,loading,bigUrl,error} = this.state;
   const dieRenderingBtn = totalPages > page;
-  // console.log(this.state)
+  console.log(this.state)
   return (
     <>
       <Searchbar onSubmit={this.settingSearchOption} />
