@@ -66,16 +66,18 @@ onClick = (event) => {
  const {searchPhoto,totalPages,page} =this.state
  
   if (searchPhoto === option ) {
-    // if (totalPages === page) {
-      this.setState({ page: 1 });
+    if (page === totalPages) {
+      this.setState(
+        { photo: [], searchPhoto: option, page: 1 });
       return
-    // }
-    // this.setState(prevState => ({
-    // page: prevState.page + 1,
-    // loading: true
-    // }));
+    }
+    this.setState(prevState => ({
+    page: prevState.page + 1,
+    loading: true
+    }));
     
-    //   return
+      return
+    
     }
  
   
