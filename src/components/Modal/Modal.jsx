@@ -1,39 +1,41 @@
 
-import React, { Component } from "react";
+import  { useEffect} from "react";
 
 import css from './Modal.module.css'
 
-class Modals extends Component {
- 
 
-componentDidMount(){window.addEventListener('keydown', this.handleKeyDown)}
+export default function Modals({url,onClose})  {
+  
+useEffect(()=> {
+  
+  const handleKeyDown= (e) => {
+  if (e.code === 'Escape') {onClose() };
+};
 
-componentWillUnmount() {window.removeEventListener('keydown', this.handleKeyDown)}
+  window.addEventListener('keydown', handleKeyDown);
+  document.body.style.overflow = 'hidden';
 
-
-handleKeyDown= (e) => {
-    if(e.code === 'Escape'){this.props.onClose()}
+return ()=>{
+  
+  window.removeEventListener('keydown', handleKeyDown);
+  document.body.style.overflow = 'auto';
 }
+  
+},[onClose]);
 
-closeModal = (e) => {
+
+const closeModal = (e) => {
     if (e.target === e.currentTarget) {
-     this.props.onClose(); // Передача події після закриття модального вікна
-    }
+     onClose(); 
+    };
   };
 
-  render() {
-   
-    const { url } = this.props;
-      return (
-        
-          <div className={css.Overlay} onClick={this.closeModal} >
-              <div className={css.Modal}>
-                  <img src={url} alt="" />
-              </div>
-          </div>
-    );
-  }
-}
+return(
+  <div className={css.Overlay} onClick={closeModal} >
+      <div className={css.Modal}>
+        <img src={url} alt="" />
+      </div>
+  </div>
+)
 
-export default Modals;
-
+};

@@ -1,43 +1,42 @@
-import React,{Component} from 'react';
+import {useState} from 'react';
 
 import css from './Searchbar.module.css'
 
-class Searchbar extends Component {
 
-state ={
- searchParam: '',
+export default function Searchbar ({onSubmit})  {
+  
+const [searchParam, setSearchParam]= useState('');
+
+const onInputChange= evt =>{
+const param =  evt.currentTarget.value ;  
+setSearchParam(param.toLowerCase())
 };
 
-onInputChange= evt =>{
-const param =  evt.currentTarget.value ;  
-this.setState({searchParam:param.toLowerCase()})
-}
-    
-onFormChange = evt =>{
+const onFormChange = evt =>{
 evt.preventDefault();
 const form = evt.currentTarget;
 const searchPhoto = form.elements.searchParam.value;
 
 if(searchPhoto.trim()){
-this.props.onSubmit(this.state.searchParam);
-this.setState({searchParam:''})
+
+onSubmit(searchParam);
+setSearchParam('')
 }
 form.reset();
 }
+     
 
-render() {
-       
 return(
     
 <header className={css.Searchbar}>
-  <form onSubmit={this.onFormChange} className={css.SearchForm}>
+  <form onSubmit={onFormChange} className={css.SearchForm}>
     <button type="submit" className={css.SearchFormButton}>
       <span className={css.SearchFormButtonLabel}>Search</span>
     </button>
 
-    <input onChange={this.onInputChange}
+    <input onChange={onInputChange}
       name='searchParam'
-      value={this.setState.searchParam}
+      value={searchParam}
       className={css.SearchFormInput}
       type="text"
       autoComplete="off"
@@ -48,8 +47,5 @@ return(
 </header>
 
 )
-
-}
-}
-
-export default Searchbar
+  
+};

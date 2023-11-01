@@ -1,0 +1,11 @@
+
+.parentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+   
+    /* Встановлює висоту контейнера на висоту вікна браузера */
+}
+
+
