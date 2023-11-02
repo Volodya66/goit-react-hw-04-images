@@ -18,7 +18,7 @@ export default function App() {
   const [searchPhoto, setSearchPhoto] = useState('');
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState('');
-  const [totalHits, setTotalHits] = useState('');
+  // const [totalHits, setTotalHits] = useState('');
   const [photo, setPhoto] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -26,6 +26,8 @@ export default function App() {
   
 
   useEffect(() => {
+
+    
     // if (page !== 0) {
     // //  return
     //   // .then(data => {
@@ -57,14 +59,14 @@ export default function App() {
     try {
       setLoading(true);
       const data = await getImage(searchPhoto, page);
-      setTotalHits(data.totalHits);
+      // setTotalHits(data.totalHits);
       setTotalPages(Math.ceil(data.totalHits / 12));
       setPhoto(prevPhoto => [...prevPhoto, ...data.hits]);
     } catch (error) {
       setError('Упссс, щось не так');
       setTotalPages(0)
       setPhoto([]);
-      console.log(totalHits)
+      // console.log(totalHits)
       console.error(
         error.message);
     } finally {
