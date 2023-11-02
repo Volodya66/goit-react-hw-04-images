@@ -64,7 +64,9 @@ export default function App() {
       setError('Упссс, щось не так');
       setTotalPages(0)
       setPhoto([]);
-      console.error(error.message);
+      console.log(totalHits)
+      console.error(
+        error.message);
     } finally {
       setLoading(false);
     }
